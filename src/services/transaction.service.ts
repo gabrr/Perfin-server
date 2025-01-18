@@ -1,11 +1,10 @@
 import { ITransaction } from "domain/entities/transaction.interface";
 import { ITransactionRepository } from "domain/repositories/transaction.repository.interface";
-import { QueryResult } from "pg";
 
 export class TransactionService {
 	constructor(private transactionRepository: ITransactionRepository) {}
 
-	async getTransactions(): Promise<ITransaction | null> {
+	async getTransactions(): Promise<ITransaction[] | null> {
 		return this.transactionRepository.getTransactions("year");
 	}
 

@@ -6,7 +6,7 @@ import uploader from "middlewares/uploader.middleware";
 const transactionsRoutes = Router();
 const transactionService = createTransactionService();
 
-transactionsRoutes.get("", async (req, res) => {
+transactionsRoutes.get("/", async (req, res) => {
 	const result = await transactionService.getTransactions();
 	return res.json(result);
 });

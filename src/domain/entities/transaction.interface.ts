@@ -1,5 +1,5 @@
 export interface ITransaction {
-	source: "card:rico" | "card:inter" | "account|inter" | "account:btg";
+	source: "card:rico" | "card:inter" | "account:inter" | "account:btg";
 	numberOfInstallments: number;
 	category: string;
 	currentInstallment: number;

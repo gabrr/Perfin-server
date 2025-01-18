@@ -17,7 +17,7 @@ export const transactionUpload = async (req: Request, _: Response, next: NextFun
 	 */
 
 	if (fileExtension === "text/csv") {
-		const transactions = await normalizeCSVTransactions(req.file.path, req.body.source);
+		const transactions = await normalizeCSVTransactions(req.file.path);
 		req.body.transactions = transactions;
 	}
 

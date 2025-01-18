@@ -51,10 +51,7 @@ export function normalizeTransaction(
 	};
 }
 
-export async function normalizeCSVTransactions(
-	filePath: string,
-	source: ITransaction["source"]
-): Promise<ITransaction[]> {
+export async function normalizeCSVTransactions(filePath: string): Promise<ITransaction[]> {
 	const rawTransactions = await parseCsv<CsvTransaction>(filePath);
-	return rawTransactions.map((transaction) => normalizeTransaction(transaction, source));
+	return rawTransactions.map((transaction) => normalizeTransaction(transaction, "card:rico"));
 }

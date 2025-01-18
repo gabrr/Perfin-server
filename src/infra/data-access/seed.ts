@@ -1,5 +1,4 @@
 import { client, db } from "./db";
-import { transactionsTable } from "./transaction/transaction.schema";
 import { usersTable } from "./user/user.schema";
 
 async function seed() {
