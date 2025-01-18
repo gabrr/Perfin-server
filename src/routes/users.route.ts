@@ -1,16 +1,16 @@
 import { Router } from "express";
-import pool from "infra/data-access/db";
+import { db } from "infra/data-access/db";
+import { usersTable } from "infra/data-access/user/user.schema";
 
 const usersRoutes = Router();
 
 usersRoutes.get("/", async (req, res) => {
-  try {
-    const result = await pool.query("SELECT * FROM users");
-    res.json(result.rows);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("Server error");
-  }
+	try {
+		const users = await db.select().from(usersTable).execute();
+		res.status(200).json(users);
+	} catch (error) {
+		res.status(500).json({ message: "Error fetching users", error });
+	}
 });
 
 export default usersRoutes;

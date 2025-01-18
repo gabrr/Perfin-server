@@ -3,13 +3,13 @@ import { ITransactionRepository } from "domain/repositories/transaction.reposito
 import { QueryResult } from "pg";
 
 export class TransactionService {
-	constructor(private transactionRepository: ITransactionRepository) { }
+	constructor(private transactionRepository: ITransactionRepository) {}
 
 	async getTransactions(): Promise<ITransaction | null> {
 		return this.transactionRepository.getTransactions("year");
 	}
 
-	async saveTransaction(data: ITransaction[]): Promise<QueryResult<ITransaction[]>> {
+	async saveTransaction(data: ITransaction[]): Promise<ITransaction[]> {
 		return this.transactionRepository.saveTransaction(data);
 	}
 

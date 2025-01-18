@@ -1,21 +1,6 @@
-import { drizzle } from "drizzle-orm/node-postgres";
-import { Client } from "pg";
+import { drizzle } from "drizzle-orm/postgres-js";
+import postgres from "postgres";
+import * as schema from "./schema";
 
-const client = new Client({
-	user: "postgres",
-	password: "postgres",
-	host: process.env.DATABASE_URL,
-});
-
-client.connect((error: Error) => {
-	if (error) {
-		console.error("Unexpected error on idle client", error);
-		process.exit(-1);
-	}
-
-	console.log("Connected to the PostgreSQL database");
-});
-
-const db = drizzle(client);
-
-export default db;
+export const client = postgres("postgres://postgres:postgres@127.0.0.1:5432/perfindb");
+export const db = drizzle(client, { schema, logger: true });
