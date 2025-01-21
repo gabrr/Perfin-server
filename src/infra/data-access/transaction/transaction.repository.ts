@@ -1,30 +1,25 @@
-import fs from "fs";
 import { ITransaction } from "domain/entities/transaction.interface";
 import {
 	ITransactionRepository,
 	TransactionsPeriod,
 } from "domain/repositories/transaction.repository.interface";
-import path from "path";
+import { getTransactionsFromFolder } from "domain/services/getTransactionsFromFolder";
 
 export class TransactionRepository implements ITransactionRepository {
 	async getTransactions(period: TransactionsPeriod): Promise<ITransaction[] | null> {
-		const transactionsFolder = path.join(__dirname, "../../../../transactions"); // Update this path based on your structure
-		const transactions: ITransaction[] = [];
+		const transactions = getTransactionsFromFolder();
+		if (!transactions) return null;
 
-		try {
-			const files = fs.readdirSync(transactionsFolder);
+		const startDate = new Date(2025, 0, 1);
+		const endDate = new Date(2025, 0, 31);
 
-			for (const file of files) {
-				const filePath = path.join(transactionsFolder, file);
-				const data = fs.readFileSync(filePath, "utf-8");
-				transactions.push(...JSON.parse(data));
-			}
-
-			return transactions;
-		} catch (error) {
-			console.error("Error reading transactions: ", error);
-			return null; // Return null in case of an error
-		}
+		return transactions
+			.filter((transaction) => {
+				const transactionDate = new Date(transaction.date);
+				return transactionDate >= startDate && transactionDate <= endDate;
+			})
+			.filter((transaction) => transaction.amount !== 13500) // work around to remove rico card payment
+			.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 	}
 
 	async saveTransaction(transactions: ITransaction[]): Promise<ITransaction[]> {

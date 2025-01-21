@@ -1,6 +1,6 @@
 import { ITransaction } from "domain/entities/transaction.interface";
 import OpenAI from "openai";
-const openai = new OpenAI({
+export const openai = new OpenAI({
 	organization: process.env.OPENAI_ORGANIZATION,
 	apiKey: process.env.OPENAI_API_KEY,
 	project: process.env.OPENAI_PROJECT,
