@@ -3,7 +3,7 @@ export async function sendPrompt(prompt: any) {
 		const response = await fetch(`http://localhost:11434/api/generate`, {
 			method: "POST",
 			headers: { "Content-Type": "text/plain" },
-			body: JSON.stringify({ model: "llama3.1:8b", prompt, stream: false }),
+			body: JSON.stringify({ model: "deepseek-r1:14b", prompt, stream: false }),
 		});
 
 		const data = await response.json();

@@ -1,0 +1,7 @@
+FROM deepseek-r1:14b
+
+SYSTEM "You are a assistant specialized in normalizing unstructured data"
+
+PARAMETER temperature 0.3
+
+ADAPTER fine-tune-transactions

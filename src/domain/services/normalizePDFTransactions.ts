@@ -44,7 +44,7 @@ export async function normalizePDFTransactions(pdfPath) {
 
 		let transactions: string[] = [];
 		for (const chunk of chunks) {
-			const parsedChunk = await parseTransactions(chunk);
+			const parsedChunk = await parseTransactions(chunk, "account:inter");
 			transactions = transactions.concat(parsedChunk);
 		}
 

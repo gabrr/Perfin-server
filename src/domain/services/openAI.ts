@@ -20,8 +20,8 @@ interface ITransaction {
   amount: number;
 }
 
-If the source is account:btg, only consider the ones with "-".
-If the source is card:rico, ignores the ones with "-".
+If the source is account:btg, only consider the values with "-".
+If the source is card:rico, ignores the values with "-".
 
 Unstructured Data:
 ${unstructuredText}

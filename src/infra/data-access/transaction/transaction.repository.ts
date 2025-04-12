@@ -13,13 +13,7 @@ export class TransactionRepository implements ITransactionRepository {
 		const startDate = new Date(2025, 0, 1);
 		const endDate = new Date(2025, 0, 31);
 
-		return transactions
-			.filter((transaction) => {
-				const transactionDate = new Date(transaction.date);
-				return transactionDate >= startDate && transactionDate <= endDate;
-			})
-			.filter((transaction) => transaction.amount !== 13500) // work around to remove rico card payment
-			.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+		return transactions.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 	}
 
 	async saveTransaction(transactions: ITransaction[]): Promise<ITransaction[]> {
